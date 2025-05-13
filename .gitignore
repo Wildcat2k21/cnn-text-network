@@ -1,4 +1,12 @@
-node_modules
-
-/dataset
-/dataset_processed
+# Игнор папок
+/node_modules
+/images-data
+/converted-images
+/cnn-models
+/cnn-temp
+/cnn-archive
+/real-images
+/conv-real-images
+/test-images
+/conv-test-images
+/metrics-json
