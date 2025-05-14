@@ -170,7 +170,12 @@ node control-generator.js --amount 96465  --interval 5
 node control-generator.js --amount 96465  --interval 5 --no-headless
 
 ```bash
-npm run convert -- --src image-data --dst converted-images --width 200 --height 200 --batch 20 --limit 5 --gray true
+npm run convert -- --src images-data --dst converted-images --width 200 --height 200 --batch 20 --limit 5 --gray true
+
+
+npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true
+
+
 
 npm run convert -- --src test-images --dst conv-test-images --width 200 --height 200 --batch 20 --gray true
 
