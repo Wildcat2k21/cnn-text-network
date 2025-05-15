@@ -173,7 +173,7 @@ node control-generator.js --amount 96465  --interval 5 --no-headless
 npm run convert -- --src images-data --dst converted-images --width 200 --height 200 --batch 20 --limit 5 --gray true
 
 
-npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true
+npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true --limit 5000
 
 
 
@@ -285,6 +285,6 @@ Epoch 6 / 30
 Эпоха 4 / 30 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] Батч 92/3750^C
 
 
-npm run train -- --model classifier
+npm run train -- --model fontClassifier
 
 npm run train -- --teach cnn-temp/classifier/epoch-4
