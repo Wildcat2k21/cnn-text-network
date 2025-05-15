@@ -30,8 +30,7 @@ async function createModel() {
   [[32,0.1],[64,0.1],[128,0.5]].forEach(([f,d],i)=>{
     model.add(tf.layers.conv2d({
       inputShape: i===0?[IMAGE_HEIGHT,IMAGE_WIDTH,1]:undefined,
-      filters: f, kernelSize:3, padding:'same', useBias:false,
-      dtype: 'float16'  // <--- добавь это
+      filters: f, kernelSize:3, padding:'same', useBias:false
     }));
     model.add(tf.layers.batchNormalization());
     model.add(tf.layers.leakyReLU({alpha:0.1}));
@@ -80,8 +79,7 @@ async function train() {
   const prep = d=>d.map(({buffer,label})=>tf.tidy(()=>({
     xs: tf.node.decodeImage(buffer,1)
          .resizeNearestNeighbor([IMAGE_HEIGHT,IMAGE_WIDTH])
-         .toFloat().div(255)
-         .cast('float16'), // <--- добавь это
+         .toFloat().div(255),
     ys: tf.tensor1d(label)
   }))).batch(BATCH_SIZE).prefetch(1);
   const trainData = prep(trainDs);
