@@ -1,14 +1,7 @@
 import * as tf from '@tensorflow/tfjs-node-gpu';
 
-console.log('TensorFlow.js version:', tf.version.tfjs);
-console.log('CUDA version:', tf.versions?.cuda || 'unknown');
-console.log('cuDNN version:', tf.versions?.cudnn || 'unknown');
+console.log("Backends:", tf.getBackend());  // Должен быть 'tensorflow'
 
-const isGPU = tf.engine().backendInstance?.isUsingGpuDevice ?? false;
-console.log('GPU доступен:', isGPU);
+tf.tensor([1, 2, 3, 4]).square().print();  // Убедись, что вычисления работают
 
-// Проверка простой математики на тензорах
-const a = tf.tensor([1, 2, 3]);
-const b = tf.tensor([4, 5, 6]);
-const c = a.add(b);
-c.print(); // [5, 7, 9]
+console.log("Is GPU available:", tf.engine().backendInstance.isUsingGpuDevice);
