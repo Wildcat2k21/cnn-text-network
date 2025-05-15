@@ -5,7 +5,7 @@
   "main": "http-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "convert": "node convert-image-data.js",
+    "convert": "node --max-old-space-size=8192 convert-image-data.js",
     "serv": "node http-server.js",
     "train": "node --max-old-space-size=8192 cnn-train.js",
     "usemodel": "node use-model.js"
