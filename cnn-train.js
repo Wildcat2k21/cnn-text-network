@@ -27,7 +27,7 @@ const NUM_CLASSES  = 14;
 const SHUFFLE_BUFFER = 2000;
 
 async function createModel() {
-  console.log(`Создание модели: ${MODEL_NAME}`);
+  console.log(`💻 Создание модели: ${MODEL_NAME}`);
   const model = tf.sequential();
   [[32,0.1],[64,0.1],[128,0.5]].forEach(([f,d],i)=>{
     model.add(tf.layers.conv2d({
@@ -61,6 +61,7 @@ async function createModel() {
 async function train() {
   let model;
   if (TEACH_PATH) {
+    console.log("💻 Дообучение модели", TEACH_PATH);
     const json = `file://${path.resolve(TEACH_PATH)}/model.json`;
     model = await tf.loadLayersModel(json);
     model.compile({ optimizer: tf.train.adam(LEARNING_RATE), loss: 'categoricalCrossentropy', metrics: ['accuracy'] });

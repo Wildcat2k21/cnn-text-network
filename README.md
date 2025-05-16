@@ -289,4 +289,4 @@ Epoch 6 / 30
 
 npm run train -- --model fontClassifier
 
-npm run train -- --teach cnn-temp/classifier/epoch-4
+npm run train -- --teach cnn-temp/font-classifier/epoch-1
