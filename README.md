@@ -176,6 +176,8 @@ npm run convert -- --src images-data --dst converted-images --width 200 --height
 npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true
 
 
+npm run convert -- --src test-images --dst conv-test-images --width 200 --height 266 --batch 20 --gray true
+
 
 npm run convert -- --src test-images --dst conv-test-images --width 200 --height 200 --batch 20 --gray true
 

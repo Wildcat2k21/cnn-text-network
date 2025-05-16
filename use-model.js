@@ -57,7 +57,7 @@ async function main() {
   }
 
   // Load TensorFlow model dynamically
-  const tf = await import('@tensorflow/tfjs-node');
+  const tf = await import('@tensorflow/tfjs-node-gpu');
   const modelPath = `file://${path.resolve(modelDir, 'model.json')}`;
   const model = await tf.loadLayersModel(modelPath);
   console.log(`✅ Модель загружена: ${modelPath}`);
