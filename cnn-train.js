@@ -24,6 +24,9 @@ const IMAGE_HEIGHT = 200;
 const IMAGE_WIDTH  = 266;
 const NUM_CLASSES  = 14;
 
+const SHUFFLE_BUFFER = 5000;
+// const BATCH_SIZE     = 256;     // <-- заменяем 32 на 256
+
 async function createModel() {
   console.log(`Создание модели: ${MODEL_NAME}`);
   const model = tf.sequential();
@@ -72,16 +75,26 @@ async function train() {
     }
   }
 
-  const ds = tf.data.generator(gen).shuffle(num);
-  const trainSize = Math.floor(num*0.8);
-  const trainDs = ds.take(trainSize);
-  const valDs   = ds.skip(trainSize);
-  const prep = d=>d.map(({buffer,label})=>tf.tidy(()=>({
-    xs: tf.node.decodeImage(buffer,1)
-         .resizeNearestNeighbor([IMAGE_HEIGHT,IMAGE_WIDTH])
-         .toFloat().div(255),
-    ys: tf.tensor1d(label)
-  }))).batch(BATCH_SIZE).prefetch(1);
+  const trainSize      = Math.floor(num * 0.8);
+
+  const baseDs = tf.data
+    .generator(gen)
+    .shuffle(SHUFFLE_BUFFER);
+
+  const trainDs = baseDs.take(trainSize);
+  const valDs   = baseDs.skip(trainSize);
+
+  const prep = ds =>
+    ds
+      .map(({buffer,label}) => tf.tidy(() => ({
+        xs: tf.node.decodeImage(buffer,1)
+             .resizeNearestNeighbor([IMAGE_HEIGHT, IMAGE_WIDTH])
+             .toFloat().div(255),
+        ys: tf.tensor1d(label)
+      })))
+      .batch(BATCH_SIZE)
+      .prefetch(1);
+
   const trainData = prep(trainDs);
   const valData   = prep(valDs);
 
