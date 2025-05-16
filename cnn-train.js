@@ -94,9 +94,8 @@ async function train() {
             .div(255),
         ys: tf.tensor1d(label)
       })), { parallelCalls: 4 })  // Параллельная обработка
-      .cache()                    // ВАЖНО: кэш ДО batch()
       .batch(BATCH_SIZE)
-      .prefetch(8);
+      .prefetch(tf.data.AUTOTUNE); // Предзагрузка батчей
 
   const trainData = prep(trainDs);
   const valData   = prep(valDs);
