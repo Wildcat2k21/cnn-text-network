@@ -4,7 +4,7 @@ import { Command } from 'commander';
 
 // Constants for input image dimensions
 const INPUT_WIDTH = 200;
-const INPUT_HEIGHT = 200;
+const INPUT_HEIGHT = 266;
 
 // Utility: generic evaluation of model outputs against expected values
 function evaluateOutputs(outputs, expects = null) {
@@ -96,7 +96,8 @@ async function main() {
     for (let j = 0; j < batch.length; j++) {
       const file = batch[j];
       const scores = arr[j];
-      const expects = tests ? (tests.find(t => t.name === file)?.expects ?? null) : null;
+      //fontCatOutput - ключ в expects
+      const expects = tests ? (tests.find(t => t.name === file)?.expects.fontCatOutput ?? null) : null;
       const { results, overall } = evaluateOutputs(scores, expects);
 
       console.log(`\nИзображение: "${file}":`);
