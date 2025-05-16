@@ -287,6 +287,6 @@ Epoch 6 / 30
 Эпоха 4 / 30 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] Батч 92/3750^C
 
 
-npm run train -- --model fontClassifier
+npm run train -- --model charWidth
 
 npm run train -- --teach cnn-temp/font-classifier/epoch-1
