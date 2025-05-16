@@ -18,11 +18,11 @@ const METRIC_DIR   = './metrics-json';
 const MODEL_DIR    = './cnn-models';
 const TEMP_DIR     = './cnn-temp';
 
-const EPOCHS       = 50;                       // Увеличенное число эпох для регрессии
-const BATCH_SIZE   = 32;                       // Оптимальный размер батча
+const EPOCHS       = 50;                       // Число эпох для обучения
+const BATCH_SIZE   = 32;                       // Размер батча
 const IMAGE_HEIGHT = 200;
 const IMAGE_WIDTH  = 266;
-const OUTPUT_UNITS = 1;                        // Один непрерывный выход
+const OUTPUT_UNITS = 2;                        // Два непрерывных выхода
 
 const SHUFFLE_BUFFER = 2000;
 
@@ -42,12 +42,12 @@ async function createModel() {
   model.add(tf.layers.dense({units:128}));
   model.add(tf.layers.leakyReLU({alpha:0.1}));
   model.add(tf.layers.dropout({rate:0.3}));
-  model.add(tf.layers.dense({units: OUTPUT_UNITS}));           // Линейная регрессия без активации
+  model.add(tf.layers.dense({units: OUTPUT_UNITS}));           // Линейная регрессия для двух выходов
 
   model.compile({
     optimizer: tf.train.adam(LEARNING_RATE),
     loss: 'meanSquaredError',                              // MSE для регрессии
-    metrics: ['mae']                                       // MAE как дополнительная метрика
+    metrics: ['mae']                                       // MAE для обеих метрик
   });
   return model;
 }
@@ -77,8 +77,8 @@ async function train() {
       const m = JSON.parse(await fs.readFile(
         path.join(METRIC_DIR,`${path.basename(f,'.jpg')}.json`),'utf-8'
       ));
-      // Используем первый элемент averageCharMetrics как целевой непрерывный показатель
-      yield {buffer: buf, label: m.averageCharMetrics[0]};
+      // Используем первые два элемента averageCharMetrics как целевые непрерывные показатели
+      yield {buffer: buf, label: [m.averageCharMetrics[0], m.averageCharMetrics[1]]};
     }
   }
 
@@ -93,7 +93,7 @@ async function train() {
         xs: tf.node.decodeImage(buffer,1)
              .resizeNearestNeighbor([IMAGE_HEIGHT, IMAGE_WIDTH])
              .toFloat().div(255),
-        ys: tf.tensor1d([label])                                                // 1D тензор [label]
+        ys: tf.tensor1d(label)                                            // 1D тензор [label0, label1]
       })))
       .batch(BATCH_SIZE)
       .prefetch(8);
