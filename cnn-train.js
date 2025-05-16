@@ -24,7 +24,7 @@ const IMAGE_HEIGHT = 200;
 const IMAGE_WIDTH  = 266;
 const NUM_CLASSES  = 14;
 
-const SHUFFLE_BUFFER = 5000;
+const SHUFFLE_BUFFER = 2000;
 // const BATCH_SIZE     = 256;     // <-- заменяем 32 на 256
 
 async function createModel() {
@@ -93,7 +93,7 @@ async function train() {
         ys: tf.tensor1d(label)
       })))
       .batch(BATCH_SIZE)
-      .prefetch(1);
+      .prefetch(4);
 
   const trainData = prep(trainDs);
   const valData   = prep(valDs);

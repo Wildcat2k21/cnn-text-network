@@ -173,7 +173,7 @@ node control-generator.js --amount 96465  --interval 5 --no-headless
 npm run convert -- --src images-data --dst converted-images --width 200 --height 200 --batch 20 --limit 5 --gray true
 
 
-npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true --limit 5000
+npm run convert -- --src images-data --dst converted-images --width 200 --height 266 --batch 20 --gray true
 
 
 
