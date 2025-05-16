@@ -89,13 +89,13 @@ async function train() {
     ds
       .map(({ buffer, label }) => tf.tidy(() => ({
         xs: tf.node.decodeImage(buffer, 1)
-             .resizeNearestNeighbor([IMAGE_HEIGHT, IMAGE_WIDTH])
-             .toFloat()
-             .div(255),
+            .resizeNearestNeighbor([IMAGE_HEIGHT, IMAGE_WIDTH])
+            .toFloat()
+            .div(255),
         ys: tf.tensor1d(label)
       })), { parallelCalls: 4 })  // Параллельная обработка
+      .cache()                    // ВАЖНО: кэш ДО batch()
       .batch(BATCH_SIZE)
-      .cache()               // Кэширование предобработанных батчей
       .prefetch(8);
 
   const trainData = prep(trainDs);
