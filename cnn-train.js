@@ -47,7 +47,7 @@ async function createModel() {
   model.compile({
     optimizer: tf.train.adam(LEARNING_RATE),
     loss: 'meanSquaredError',                              // MSE для регрессии
-    metrics: ['meanAbsoluteError']                         // MAE как дополнительная метрика
+    metrics: ['mae']                                       // MAE как дополнительная метрика
   });
   return model;
 }
@@ -60,7 +60,8 @@ async function train() {
     model = await tf.loadLayersModel(json);
     model.compile({
       optimizer: tf.train.adam(LEARNING_RATE),
-      loss: 'meanSquaredError', metrics:['meanAbsoluteError']
+      loss: 'meanSquaredError',
+      metrics: ['mae']
     });
   } else {
     console.log(`💻 Создание модели: ${MODEL_NAME}`);
@@ -116,8 +117,8 @@ async function train() {
     onEpochEnd: async (epoch, logs) => {
       batchBar.stop();
       epochBar.increment();
-      console.log(` [Эпоха ${epoch+1} — loss=${logs.loss.toFixed(4)}, mae=${logs.meanAbsoluteError.toFixed(4)}, `+
-                  `val_loss=${logs.val_loss.toFixed(4)}, val_mae=${logs.val_meanAbsoluteError.toFixed(4)}]`);
+      console.log(` [Эпоха ${epoch+1} — loss=${logs.loss.toFixed(4)}, mae=${logs.mae.toFixed(4)}, `+
+                  `val_loss=${logs.val_loss.toFixed(4)}, val_mae=${logs.val_mae.toFixed(4)}]`);
       const out = path.join(TEMP_DIR, MODEL_NAME, `epoch-${epoch+1}`);
       await fs.mkdir(out, {recursive:true});
       await model.save(`file://${out}`);
