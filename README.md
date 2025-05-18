@@ -294,6 +294,8 @@ Epoch 6 / 30
 
 npm run train -- --model charWH
 
+npm run train -- --model charXY
+
 npm run train -- --teach cnn-temp/font-classifier/epoch-1
 
 npm run train -- --teach cnn-temp/epoch-1/epoch-1

@@ -78,7 +78,7 @@ async function train() {
         path.join(METRIC_DIR,`${path.basename(f,'.jpg')}.json`),'utf-8'
       ));
       // Используем первые два элемента averageCharMetrics как целевые непрерывные показатели
-      yield {buffer: buf, label: [m.averageCharMetrics[2], m.averageCharMetrics[3]]};
+      yield {buffer: buf, label: [m.averageLineMetrics[0], m.averageLineMetrics[1]]};
     }
   }
 
