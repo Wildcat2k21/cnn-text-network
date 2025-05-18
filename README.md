@@ -190,7 +190,9 @@ npm run convert -- --src test-images --dst conv-test-images --width 200 --height
 
 
 ```bash
-node use-model.js --model cnn-temp/classifier/epoch-1 --imgdir conv-test-images --batch 10 --run-tests usemodel-json-tests/classifier.json
+node use-model.js --model cnn-temp/font-new/epoch-0 --imgdir conv-test-images --batch 10 --run-tests usemodel-json-tests/classifier.json
+
+node use-model.js --model cnn-temp/epoch-1 --imgdir conv-test-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 
 node use-model.js --model cnn-temp/classifier/epoch-4 --imgdir conv-test-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 
@@ -200,8 +202,11 @@ node use-model.js --model cnn-temp/epoch-4/epoch-2 --imgdir conv-test-images --b
 
 node use-model.js --model cnn-temp/epoch-4/epoch-2 --imgdir conv-real-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 
-node use-model.js --model cnn-temp/epoch-4/epoch-2 --imgdir conv-real-images --batch 10 --run-tests usemodel-json-tests/classifier.json
+node use-model.js --model cnn-temp/charWH/epoch-1 --imgdir conv-real-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 ```
+
+✅ Да
+✅ Нет
 
 ```bash
 npm run convert -- --src test-data --dst conv-test-data --width 200 --height 200 \
@@ -287,6 +292,8 @@ Epoch 6 / 30
 Эпоха 4 / 30 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] Батч 92/3750^C
 
 
-npm run train -- --model charWidth
+npm run train -- --model charWH
 
 npm run train -- --teach cnn-temp/font-classifier/epoch-1
+
+npm run train -- --teach cnn-temp/epoch-1/epoch-1
