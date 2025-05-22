@@ -231,7 +231,7 @@ node control-generator.js -a 118990 -b 100 -i 5
 
 node control-generator.js -a 118990 -b 1000 -i 5 --no-headless
 
-node control-generator.js -a 200000 -b 3000 -i 5 --no-headless
+node control-generator.js -a 150000 -b 3000 -i 5 --no-headless
 
 
 
