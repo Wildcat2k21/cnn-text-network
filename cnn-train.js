@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs-node';
+import * as tf from '@tensorflow/tfjs-node-gpu';
 import fs from 'fs/promises';
 import path from 'path';
 import cliProgress from 'cli-progress';
