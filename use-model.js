@@ -3,7 +3,7 @@ import path from 'path';
 import { Command } from 'commander';
 
 // Constants for input image dimensions
-const INPUT_WIDTH = 266;
+const INPUT_WIDTH = 200;
 const INPUT_HEIGHT = 200;
 
 // Utility: generic evaluation of model outputs against expected values

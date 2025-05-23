@@ -203,6 +203,8 @@ node use-model.js --model cnn-temp/epoch-4/epoch-2 --imgdir conv-test-images --b
 node use-model.js --model cnn-temp/epoch-4/epoch-2 --imgdir conv-real-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 
 node use-model.js --model cnn-temp/charWH/epoch-1 --imgdir conv-real-images --batch 10 --run-tests usemodel-json-tests/classifier.json
+
+node use-model.js --model cnn-temp/classifier/epoch-1 --imgdir conv-test-images --batch 10 --run-tests usemodel-json-tests/classifier.json
 ```
 
 ✅ Да
