@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs-node';
+import * as tf from '@tensorflow/tfjs-node-gpu';
 import fs from 'fs/promises';
 import path from 'path';
 import cliProgress from 'cli-progress';
@@ -48,7 +48,7 @@ async function createModel() {
     model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] }));
     model.add(tf.layers.dropout({ rate: dropRate }));
   });
-  model.add(tf.layers.globalAveragePooling2d());
+  model.add(tf.layers.globalAveragePooling2d({}));
   model.add(tf.layers.dense({ units: 128 }));
   model.add(tf.layers.leakyReLU({ alpha: 0.1 }));
   model.add(tf.layers.dropout({ rate: 0.3 }));
