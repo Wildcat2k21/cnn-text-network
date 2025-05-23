@@ -116,7 +116,7 @@ async function train() {
       .resizeNearestNeighbor([IMAGE_HEIGHT, IMAGE_WIDTH])
       .toFloat().div(255),
     ys: tf.tensor1d(label)
-  }))).batch(BATCH_SIZE).prefetch(tf.data.AUTOTUNE);
+  }))).batch(BATCH_SIZE).prefetch(1);
 
   const trainData = prepare(trainDs);
   const valData = prepare(valDs);
