@@ -97,7 +97,7 @@ async function main() {
       const file = batch[j];
       const scores = arr[j];
       //fontCatOutput - ключ в expects
-      const expects = tests ? (tests.find(t => t.name === file)?.expects.fontCatOutput ?? null) : null;
+      const expects = tests ? (tests.find(t => t.name === file)?.expects ?? null) : null;
       const { results, overall } = evaluateOutputs(scores, expects);
 
       console.log(`\nИзображение: "${file}":`);
